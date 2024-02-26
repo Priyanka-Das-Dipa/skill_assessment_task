@@ -1,8 +1,14 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import auth from "../../firebase/firebase.config";
+import { useState } from "react";
 
 const Login = () => {
+  const [success, setSuccess] = useState();
+
+  const navigate = useNavigate();
+
+  const from = location.state?.from?.pathname || "/";
   const handleLogin = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
@@ -11,9 +17,12 @@ const Login = () => {
 
     console.log(email, pin);
 
+    setSuccess(" ");
+
     signInWithEmailAndPassword(auth, email, password)
       .then((result) => {
         console.log(result);
+        navigate(from, { replace: true})
       })
       .catch((error) => {
         console.log(error);
@@ -70,6 +79,7 @@ const Login = () => {
             </Link>
           </span>
         </form>
+        {success && <p className="text-green-600">{success}</p>}
       </div>
     </div>
   );
