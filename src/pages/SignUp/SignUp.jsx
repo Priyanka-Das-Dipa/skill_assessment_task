@@ -33,6 +33,7 @@ const SignUp = () => {
       phone,
       accountType,
       password,
+      balance : 40,
     };
 
     signUp(email, password).then((res) => {

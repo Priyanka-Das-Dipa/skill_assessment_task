@@ -22,14 +22,7 @@ const Login = () => {
       toast("user create successfully!");
       navigate("/");
     });
-    // signInWithEmailAndPassword(auth, email, password)
-    //   .then((result) => {
-    //     console.log(result);
-    //     navigate(from, { replace: true})
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
+    
   };
   return (
     <div className="container mx-auto mt-10">

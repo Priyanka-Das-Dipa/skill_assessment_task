@@ -1,4 +1,20 @@
+import { useContext } from "react";
+import { AuthContextInfo } from "../provider/AuthProvider";
+import useAxiosPublic from "../hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
+
 const Dashboard = () => {
+  const { user } = useContext(AuthContextInfo);
+  const { axiosPublic } = useAxiosPublic();
+
+  const { data } = useQuery({
+    queryKey: ["getUser", user?.email],
+    queryFn: () => {
+      return axiosPublic.get(`/getUser`, user?.email);
+    },
+  });
+  console.log(data);
+
   return (
     <div>
       <div className="overflow-x-auto">
@@ -46,7 +62,6 @@ const Dashboard = () => {
                 <button className="btn btn-ghost btn-xs">details</button>
               </th>
             </tr>
-           
           </tbody>
         </table>
       </div>
