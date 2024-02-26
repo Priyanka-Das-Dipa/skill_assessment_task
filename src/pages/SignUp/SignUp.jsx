@@ -1,10 +1,16 @@
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { Link } from "react-router-dom";
-import auth from "../../firebase/firebase.config";
-import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+// import auth from "../../firebase/firebase.config";
+import { useContext, useState } from "react";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import { AuthContextInfo } from "../../provider/AuthProvider";
+import toast from "react-hot-toast";
+import { updateProfile } from "firebase/auth";
 
 const SignUp = () => {
+  const { signUp } = useContext(AuthContextInfo);
   const [success, setSuccess] = useState();
+  const axiosPublic = useAxiosPublic();
+  const navigate = useNavigate();
 
   const handleSignUp = (e) => {
     e.preventDefault();
@@ -13,19 +19,36 @@ const SignUp = () => {
     const password = e.target.password.value;
     const pin = e.target.pin.value;
     const phone = e.target.phone.value;
+    const nid = e.target.nid.value;
     const accountTypeSelect = e.target.accountType;
     const accountType =
       accountTypeSelect.options[accountTypeSelect.selectedIndex].value;
-    console.log(name, email, pin, phone, accountType);
+    console.log(name, email, pin, phone, accountType, password, nid);
     setSuccess(" ");
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((result) => {
-        console.log(result);
-        setSuccess("User create successfully");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+
+    const userInfo = {
+      name,
+      email,
+      pin,
+      phone,
+      accountType,
+      password,
+    };
+
+    signUp(email, password).then((res) => {
+      if (res.user) {
+        updateProfile(res.user, {
+          displayName: name,
+        })
+          .then()
+          .catch();
+        axiosPublic.post("/users", userInfo).then((res) => {
+          console.log(res.data);
+        });
+        toast("user create successfully!");
+        navigate("/");
+      }
+    });
   };
   return (
     <div className="container mx-auto mt-10">
@@ -87,6 +110,17 @@ const SignUp = () => {
               <option>Agent</option>
               <option>User</option>
             </select>
+          </label>
+          <label className="form-control w-full max-w-xs">
+            <div className="label">
+              <span className="label-text">Enter NID</span>
+            </div>
+            <input
+              type="number"
+              name="nid"
+              placeholder="Type password"
+              className="input input-bordered w-full max-w-xs"
+            />
           </label>
           <label className="form-control w-full max-w-xs">
             <div className="label">

@@ -1,32 +1,35 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
-import auth from "../../firebase/firebase.config";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContextInfo } from "../../provider/AuthProvider";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const [success, setSuccess] = useState();
-
+  const { logIn } = useContext(AuthContextInfo);
   const navigate = useNavigate();
 
-  const from = location.state?.from?.pathname || "/";
+  // const from = location.state?.from?.pathname || "/";
   const handleLogin = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const pin = e.target.pin.value;
     const password = e.target.password.value;
-
     console.log(email, pin);
 
     setSuccess(" ");
-
-    signInWithEmailAndPassword(auth, email, password)
-      .then((result) => {
-        console.log(result);
-        navigate(from, { replace: true})
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    logIn(email, password).then((res) => {
+      console.log(res);
+      toast("user create successfully!");
+      navigate("/");
+    });
+    // signInWithEmailAndPassword(auth, email, password)
+    //   .then((result) => {
+    //     console.log(result);
+    //     navigate(from, { replace: true})
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
   };
   return (
     <div className="container mx-auto mt-10">
