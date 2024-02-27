@@ -15,10 +15,13 @@ export const AuthContextInfo = createContext("");
 const auth = getAuth(app);
 // eslint-disable-next-line react/prop-types
 const AuthProvider = ({ children }) => {
+
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+
   //   const useAxiosSecure = useAxiosPublic();
   const Provider = new GoogleAuthProvider();
+  
   const loginWithGoogle = () => {
     return signInWithPopup(auth, Provider);
   };

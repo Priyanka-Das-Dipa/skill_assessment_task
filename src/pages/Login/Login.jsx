@@ -22,12 +22,13 @@ const Login = () => {
       toast("user create successfully!");
       navigate("/");
     });
-    
   };
   return (
     <div className="container mx-auto mt-10">
-      <p className="text-2xl font-semibold text-center py-5">Please Login</p>
-      <div className="border rounded-lg p-10 flex items-center justify-center">
+      <p className="text-2xl font-semibold text-center py-5">
+        Please Login to your payment system
+      </p>
+      <div className="rounded-lg p-10 flex items-center justify-center">
         <form onSubmit={handleLogin}>
           <div className="space-y-1 ">
             <label className="form-control w-full max-w-xs">

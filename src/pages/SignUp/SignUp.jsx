@@ -33,7 +33,7 @@ const SignUp = () => {
       phone,
       accountType,
       password,
-      balance : 40,
+      balance: 40,
     };
 
     signUp(email, password).then((res) => {
@@ -53,9 +53,12 @@ const SignUp = () => {
   };
   return (
     <div className="container mx-auto mt-10">
-      <p className="text-2xl font-semibold text-center py-5">Please SignUp</p>
-      <div className="mx-auto border rounded-lg py-10 flex items-center justify-center">
+      <p className="text-2xl font-semibold text-center py-5">
+        Please SignUp to your payment system
+      </p>
+      <div className="mx-auto rounded-lg py-10 flex items-center justify-center">
         <form onSubmit={handleSignUp}>
+          <div className="flex gap-10">
           <label className="form-control w-full max-w-xs">
             <div className="label">
               <span className="label-text">Enter your name</span>
@@ -78,6 +81,8 @@ const SignUp = () => {
               className="input input-bordered w-full max-w-xs"
             />
           </label>
+          </div>
+          <div className="flex gap-10">
           <label className="form-control w-full max-w-xs">
             <div className="label">
               <span className="label-text">Enter your 5 digit PIN</span>
@@ -100,6 +105,8 @@ const SignUp = () => {
               className="input input-bordered w-full max-w-xs"
             />
           </label>
+          </div>
+          <div className="flex gap-10">
           <label className="form-control w-full max-w-xs">
             <div className="label">
               <span className="label-text">Pick Account Type</span>
@@ -123,6 +130,7 @@ const SignUp = () => {
               className="input input-bordered w-full max-w-xs"
             />
           </label>
+          </div>
           <label className="form-control w-full max-w-xs">
             <div className="label">
               <span className="label-text">Enter your password</span>
