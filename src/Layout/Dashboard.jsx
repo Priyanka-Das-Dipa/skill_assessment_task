@@ -27,7 +27,10 @@ const Dashboard = () => {
             <NavLink to="/dashboard/agentTable">Agent Table</NavLink>
           </li>
           <li>
-            <NavLink to="/dashboard/addMoney">AddMoney</NavLink>
+            <NavLink to="/dashboard/addMoney">Add Money</NavLink>
+          </li>
+          <li>
+            <NavLink to="/dashboard/sendMoney">Send Money</NavLink>
           </li>
         </ul>
       </div>

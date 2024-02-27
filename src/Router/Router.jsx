@@ -7,6 +7,7 @@ import Dashboard from "../Layout/Dashboard";
 import UserTable from "../Dashboard/UserTable";
 import AgentTable from "../Dashboard/AgentTable";
 import Addmoney from "../forms/Addmoney/Addmoney";
+import SendMoney from "../forms/SendMoney/SendMoney";
 
 const router = createBrowserRouter([
   {
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
       {
         path: "addMoney",
         element: <Addmoney></Addmoney>
+      },
+      {
+        path: "sendMoney",
+        element: <SendMoney></SendMoney>
       }
     ]
   },
